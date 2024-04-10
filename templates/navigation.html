@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Navigtaion page</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../static/style.css" />
+    <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""
+  />
+  <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""
+  ></script>
+  </head>
+  <style>
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans&display=swap');
+
+    * {
+      max-width: 100vw;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Work Sans', sans-serif;
+    }
+    .mainBody {
+      width: 100vw;
+      height: 70vh;
+
+      background-image: url("../static/assets/navBg.webp");
+
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
+
+    }
+  </style>
+  <body>
+    <nav class="flex justify-between items-center m-6">
+      <div class="text-[20px] font-bold text-[#00BD51] cursor-pointer">INNO WHEELS</div>
+      <div class="text-[20px] font-bold">
+        <a href="/services" class=" hover:text-[#00BD51]">SERVICES</a>
+      </div>
+
+      <div>
+        <div class="container">
+          <div class="chatbox">
+              <div class="chatbox__support">
+                  <div class="chatbox__header">
+                      <div class="chatbox__image--header">
+                          <img src="https://img.icons8.com/color/48/000000/circled-user-female-skin-type-5--v1.png" alt="image">
+                      </div>
+                      <div class="chatbox__content--header">
+                          <h4 class="chatbox__heading--header">Chat support</h4>
+                          <p class="chatbox__description--header">Hi. My name is Inno-Wheels. How can I help you?</p>
+                      </div>
+                  </div>
+                  <div class="chatbox__messages">
+                      <div></div>
+                  </div>
+                  <div class="chatbox__footer">
+                      <input type="text" placeholder="Write a message...">
+                      <button class="chatbox__send--footer send__button">Send</button>
+                  </div>
+              </div>
+              <div class="chatbox__button">
+                  <button class="bg-[#CEFDD5] w-[104px] h-[34px] rounded-[17px] font-medium hover:bg-[#00bd51] hover:text-white">Get Help</button>
+              </div>
+          </div>
+      </div>
+
+        <!-- <button
+          class="bg-[#CEFDD5] w-[104px] h-[34px] rounded-[17px] font-medium hover:bg-[#00bd51] hover:text-white"
+        >
+          Get Help
+        </button> -->
+      </div>
+    </nav>
+    <div class="text-6xl font-semibold text-center py-6 text-[#00bd51]">
+      Navigation <i class="bx bxs-navigation" style="color: #00bd51"></i>
+    </div>
+
+    <!-- navroutes -->
+
+    <section class="mainBody flex flex-row justify-center items-center">
+      <div>
+        <button class="bg-[#00bd51] text-center text-3xl text-white w-[250px] h-[250px] rounded-full hover:scale-105">
+          <a href="/map">Go to Map</a>
+        </button>
+      </div>
+      
+    </section>
+    <script src="../static/script.js"></script>
+    <script>
+      var map = L.map('map').setView([51.505, -0.09], 3);
+
+      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          maxZoom: 19,
+          attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+      }).addTo(map);
+
+      if (!navigator.geolocation) {
+          console.log("Your browser doesn't support geolocation feature.");
+      } else {
+          navigator.geolocation.getCurrentPosition(getPosition);
+      }
+
+      var marker, circle;
+
+      function
+
+getPosition(position) {
+          console.log(position);
+
+
+          
+var lat = position.coords.latitude;
+          var long = position.coords.longitude;
+          var accuracy = position.coords.accuracy;
+
+          // Extract latitude and longitude values
+          var latitudeValue = lat.toFixed(4);
+          var longitudeValue = long.toFixed(4);
+
+          // Display latitude and longitude values in HTML
+          document.getElementById('latitude').innerHTML = 'Latitude: ' + latitudeValue;
+          document.getElementById('longitude').innerHTML = 'Longitude: ' + longitudeValue;
+
+          if (marker) {
+              map.removeLayer(marker);
+          }
+          if (circle) {
+              map.removeLayer(circle);
+          }
+
+          marker = L.marker([lat, long]).addTo(map);
+          circle = L.circle([lat, long], { radius: accuracy }).addTo(map);
+
+          var featureGroup = L.featureGroup([marker, circle]).addTo(map);
+
+          map.fitBounds(featureGroup.getBounds());
+
+          console.log("Your coordinate is : Lat:" + lat + " Long:" + long + " Accuracy : " + accuracy);
+      }
+  </script>
+  </body>
+</html>

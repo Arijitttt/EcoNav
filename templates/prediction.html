@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CO2 Prediction</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../static/style.css" />
+    
+  </head>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Work+Sans&display=swap");
+
+    * {
+      max-width: 100vw;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Work Sans", sans-serif;
+    }
+    .mainBody {
+      width: 100vw;
+      height: 70vh;
+
+      background-image: url("../static/assets/co2Bg.webp");
+
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+  </style>
+  <body>
+    <nav class="flex justify-between items-center m-6">
+      <div class="text-[20px] font-bold text-[#00BD51] cursor-pointer">
+        INNO WHEELS
+      </div>
+      <div class="text-[20px] font-bold">
+        <a href="/services" class="hover:text-[#00BD51]">SERVICES</a>
+      </div>
+
+      <div>
+
+        <div class="container">
+          <div class="chatbox">
+              <div class="chatbox__support">
+                  <div class="chatbox__header">
+                      <div class="chatbox__image--header">
+                          <img src="https://img.icons8.com/color/48/000000/circled-user-female-skin-type-5--v1.png" alt="image">
+                      </div>
+                      <div class="chatbox__content--header">
+                          <h4 class="chatbox__heading--header">Chat support</h4>
+                          <p class="chatbox__description--header">Hi. My name is Inno-Wheels. How can I help you?</p>
+                      </div>
+                  </div>
+                  <div class="chatbox__messages">
+                      <div></div>
+                  </div>
+                  <div class="chatbox__footer">
+                      <input type="text" placeholder="Write a message...">
+                      <button class="chatbox__send--footer send__button">Send</button>
+                  </div>
+              </div>
+              <div class="chatbox__button">
+                  <button class="bg-[#CEFDD5] w-[104px] h-[34px] rounded-[17px] font-medium hover:bg-[#00bd51] hover:text-white">Get Help</button>
+              </div>
+          </div>
+      </div>
+
+        <!-- <button
+          class="bg-[#CEFDD5] w-[104px] h-[34px] rounded-[17px] font-medium hover:bg-[#00bd51] hover:text-white"
+        >
+          Get Help
+        </button> -->
+       
+      
+         
+      </div>
+    </nav>
+    <div class="text-6xl font-semibold text-center py-6 text-[#00bd51]">
+      CO2 Prediction <i class="bx bxs-cloud" style="color: #00bd51"></i>
+    </div>
+
+    <!-- data prediction -->
+    <section class="mainBody flex flex-row justify-evenly items-center">
+      <div class="flex flex-col justify-center items-center gap-6">
+        <div class="font-medium text-[#00bd51] text-3xl">
+          Data <i class="bx bx-stats" style="color: #00bd51"></i>
+        </div>
+        <div
+          class="w-[600px] h-[400px] shadow-xl rounded-xl hover:scale-105 bg-white text-justify px-5"
+        >
+          InnoWheels recognizes the imperative to monitor and control CO2
+          emission levels from cars, aligning with our commitment to sustainable
+          innovation. As the automotive industry evolves, the environmental
+          impact of vehicle emissions becomes increasingly significant.
+          InnoWheels aims to address this challenge by integrating advanced
+          technologies that not only enhance performance but also minimize
+          carbon footprints. Our project emphasizes the urgent need for
+          responsible automotive practices, aligning with global efforts to
+          combat climate change. By closely monitoring CO2 emissions, InnoWheels
+          seeks to contribute to a cleaner and greener future, promoting
+          eco-friendly transportation solutions that prioritize environmental
+          stewardship without compromising on driving experience and efficiency.
+          <br><br>
+          <div class="decoration-double">{{prediction_text}}</div>
+        </div>
+      </div>
+      <div
+        class="w-[300px] h-[450px] bg-white shadow-xl rounded-xl hover:scale-105 bg-white"
+      >
+        <form
+          action="{{url_for('prediction')}}"
+          method="POST"
+          class="flex flex-col m-6 p-4 justify-center items-start gap-5"
+        >
+          <label for="" class="text-2xl">Engine Size:</label>
+          <input
+            type="text"
+            name="a"
+            placeholder="Min: 1 Max: 7"
+            id=""
+            class="outline outline-1 outline-[#00bd51] rounded-xl h-[35px]"
+          />
+          <label for="" class="text-2xl">Cylinder</label>
+          <input
+            type="text"
+            name="b"
+            placeholder="Min: 2 Max: 10"
+            id=""
+            class="outline outline-1 outline-[#00bd51] rounded-xl h-[35px]"
+          />
+          <label for="" class="text-2xl">Fuel Consumption: </label>
+          <input
+            type="text"
+            name="c"
+            placeholder="Min: 0 Max: 30"
+            id=""
+            class="outline outline-1 outline-[#00bd51] rounded-xl h-[35px]"
+          />
+          <input
+            type="submit"
+            value="predict"
+            class="bg-[#00bd51] text-center text-3xl text-white w-[150px] h-[50px] rounded-full"
+          />
+          <!-- <button class="bg-[#00bd51] text-center text-3xl text-white w-[150px] h-[50px] rounded-full">Show</button> -->
+        </form>
+      </div>
+    </section>
+    <script src="../static/script.js"></script>
+  </body>
+</html>
